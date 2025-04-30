@@ -25,7 +25,7 @@ int main()
 
      for(auto& [marker, lista_indici] : m_0Ds_markers)
      {
-        cout<<"Marker0D: "<<marker<<"\tIDs = [";
+        cout<<marker<<": IDs = [";
         for(auto& indice : lista_indici)
             cout<<' '<<indice;
         cout<<" ]"<<endl;
@@ -34,7 +34,7 @@ int main()
      cout<<endl;
      for(auto& [marker, lista_indici] : m_1Ds_markers)
      {
-        cout<<"Marker1D: "<<marker<<"  IDs = [";
+        cout<<marker<<": IDs = [";
         for(auto& indice : lista_indici)
             cout<<' '<<indice;
         cout<<" ]"<<endl;

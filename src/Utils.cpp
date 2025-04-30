@@ -8,6 +8,7 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <cmath>
 
 
 namespace PolygonalLibrary{
@@ -121,12 +122,20 @@ bool import_cell1Ds(Polygonal_Mesh& mesh)
         //Lunghezza nulla?
         int& origin = mesh.cell1Ds_extrema(0, indice);
         int& end = mesh.cell1Ds_extrema(1, indice);
-        if(origin == end)
-        {
+        const MatrixXd coord = mesh.cell0Ds_coordinates;
+        const double X_vertice_corrente = coord(0, origin); //Estraggo le coordinate del vertice corrente
+        const double Y_vertice_corrente = coord(1, origin);
+        const double X_vertice_successivo = coord(0, end); //Estraggo le coordinate del vertice successivo
+        const double Y_vertice_successivo = coord(1, end);
+        double distanza = sqrt(((X_vertice_successivo - X_vertice_corrente)*(X_vertice_successivo - X_vertice_corrente)) + (Y_vertice_successivo - Y_vertice_corrente)*(Y_vertice_successivo - Y_vertice_corrente));
+        
+        if(distanza < 1e-16)
+        { 
             cerr<<"Stop: l'arco "<<indice<<" ha lunghezza nulla"<<endl;
             return false;
         }
-        
+
+       
     }
 
     return true;
@@ -223,7 +232,7 @@ bool import_cell2Ds(Polygonal_Mesh& mesh)
             cerr<<"Stop: il poligono "<<indice<<" ha area zero"<<endl;
             return false;
         }
-            
+        
 
     }
 
